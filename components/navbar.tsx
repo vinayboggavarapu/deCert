@@ -17,10 +17,14 @@ const Navbar = () => {
     return null;
   }
   return (
-    <div className={`fixed w-screen`}>
-      <div className="flex justify-between items-center p-6">
-        <Link href="/">
-          <h1 className="text-2xl cursor-pointer">Decert.</h1>
+    <div className="flex sticky top-0 z-[1000] bg-white justify-between items-center p-2">
+      <Link href="/">
+        <h1 className="text-2xl cursor-pointer">Decert.</h1>
+      </Link>
+      <ul className="hidden lg:flex gap-4">
+        <li>Home</li>
+        <Link href="/user">
+          <button>User</button>
         </Link>
         <ul className="hidden md:flex gap-4 border-2 p-2">
           <li>Home</li>
