@@ -15,8 +15,8 @@ const HomePage = () => {
           <button>Issuer</button>
         </Link> */}
         {/* Image here */}
-        <div className="flex flex-col w-screen gap-3 text-3xl">
-          <div className=" flex justify-center items-center">
+        <div className="flex flex-col w-screen gap-3 text-3xl ">
+          <div className=" flex justify-center items-center h-screen">
             <div className="w-1/2 justify-center flex">
               <Image src={"/as-1.jpg"} width={400} height={400} alt="logo" />
             </div>
@@ -35,21 +35,21 @@ const HomePage = () => {
             </div>
           </div>
 
-          <div className="w-full text-center flex flex-col gap-10 py-10">
+          <div className="w-full text-center flex flex-col gap-10 py-10 h-screen">
             <h2 className="text-3xl bold">Unlock the possibilities</h2>
             <div className="flex">
-              <div className="flex gap-12">
-                <div className="flex flex-col w-full">
+              <div className="flex gap-28 mx-auto">
+                <div className="flex flex-col w-full items-center">
                   <Image
-                    src={"/as-1.jpg"}
+                    src={"/verefied.webp"}
                     width={400}
                     height={400}
                     alt="logo"
-                    className="w-36 h-36"
+                    className="w-36 h-36 "
                   />
                   <p className="text-lg">Verified certificate showcase</p>
                 </div>
-                <div className="flex flex-col w-full">
+                <div className="flex flex-col w-full items-center">
                   <Image
                     src={"/verefied.jpg"}
                     width={400}
@@ -60,7 +60,7 @@ const HomePage = () => {
 
                   <p className="text-lg">Certification Issuance</p>
                 </div>
-                <div className="flex flex-col w-full">
+                <div className="flex flex-col w-full items-center">
                   <Image
                     src={"/user-val.jpg"}
                     width={400}
@@ -73,6 +73,23 @@ const HomePage = () => {
                 </div>
               </div>
             </div>
+          </div>
+          <div className="w-full py-16 bg-[#F6F6F4]">
+            <div className="w-7/12 mx-auto">
+              <h2 className="text-3xl bold ">Why Choose Decert?</h2>
+              <p className="text-base w-9/12 py-6">
+                At Decert, transparency drives trust. With our user-centric
+                approach, certifications are stored securely using IPFS and
+                Filecoin via Lighthouse, ensuring permanent integrity and easy
+                access. Our intuitive interface simplifies verification,
+                empowering users with complete control over their
+                certifications. This fusion of transparency, user control, and
+                secure storage makes certifications both secure and effortlessly
+                accessible.
+              </p>
+              <Button variant="secondary">Get Started</Button>
+            </div>
+            {/* <Image/> */}
           </div>
         </div>
       </div>

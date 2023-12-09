@@ -2,6 +2,7 @@
 import { useWeb3Modal } from "@web3modal/wagmi/react";
 import Link from "next/link";
 import React, { useEffect } from "react";
+import { useWindowScroll } from "react-use";
 import { useAccount, useDisconnect } from "wagmi";
 
 const Navbar = () => {
@@ -16,12 +17,12 @@ const Navbar = () => {
     return null;
   }
   return (
-    <div className="bg-[#dc5757]">
-      <div className="flex justify-between items-center p-4">
+    <div className={`fixed w-screen`}>
+      <div className="flex justify-between items-center p-6">
         <Link href="/">
           <h1 className="text-2xl cursor-pointer">Decert.</h1>
         </Link>
-        <ul className="hidden md:flex gap-4">
+        <ul className="hidden md:flex gap-4 border-2 p-2">
           <li>Home</li>
           <Link href="/user">
             <button>User</button>

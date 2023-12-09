@@ -22,6 +22,7 @@
     "next": "14.0.3",
     "react": "^18",
     "react-dom": "^18",
+    "react-use": "^17.4.2",
     "tailwind-merge": "^2.1.0",
     "tailwindcss-animate": "^1.0.7",
     "uuid": "^9.0.1",
