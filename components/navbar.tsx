@@ -33,7 +33,7 @@ const Navbar = () => {
       <>
         {!address ? (
           <button
-            className="text-md py-2.5 px-6 rounded-full bg-black text-[#cccc]"
+            className="text-md py-2.5 px-6 rounded-full bg-black text-[#ebebebea]"
             onClick={() => {
               open();
             }}
@@ -42,7 +42,7 @@ const Navbar = () => {
           </button>
         ) : (
           <button
-            className="text-md py-2 px-6 rounded-full bg-blue-600 text-white"
+            className="text-md py-2.5 px-6 rounded-full bg-black text-[#ebebebea]"
             onClick={() => {
               disconnect();
             }}

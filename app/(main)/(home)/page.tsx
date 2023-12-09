@@ -11,7 +11,7 @@ const HomePage = () => {
   return (
     <div>
       {/* //Two sections with two cta */}
-      <div className="flex gap-4 justify-center items-center">
+      <div className="flex flex-col overflow-hidden gap-4 justify-center items-center">
         {/* <Link href="/user/vinay" className="p-4 border">
           <button>User</button>
         </Link>
@@ -36,25 +36,19 @@ const HomePage = () => {
                   Empowering Trust through transparency and Verifiable
                   Certifications
                 </p>
-                <Button  variant="secondary" className="">
+                <Button variant="secondary" className="">
                   Get Started
                 </Button>
               </div>
             </div>
           </div>
 
-          <div className="w-[calc(100vw-10vw)] rounded-xl mx-auto bg-slate-300 text-center flex flex-col gap-10 py-10 h-[calc(100vh-20vh)]">
+          <div className="relative z-20 w-[calc(100vw-10vw)] rounded-xl mx-auto bg-slate-300 text-center flex flex-col gap-10 py-10 h-[calc(100vh-20vh)]">
             <h2 className={`${space_grotesk.className} text-4xl font-bold`}>
-              Unlock the{" "}
-              <span className="block text-[#232323] ">possibilities</span>
-              <Image
-                src="/circle.svg"
-                width={400}
-                height={400}
-                alt="arrow"
-                className="inline"
-              />
+              Unlock the possibilities
             </h2>
+            <div className="z-0 lg:w-80 lg:absolute lg:h-36 lg:border top-0 lg:rotate-45 lg:rounded-[100%] lg:border-gray-500 lg:p-10"></div>
+            <div className="z-0 lg:w-80 lg:absolute lg:h-36 lg:border top-0 lg:rotate-90 lg:rounded-[100%] lg:border-gray-500 lg:p-10"></div>
             <div
               className={`flex justify-center items-center h-full ${poppins.className}`}
             >
@@ -94,10 +88,12 @@ const HomePage = () => {
               </div>
             </div>
           </div>
-          <div className="w-full py-16 bg-[#F6F6F4]">
-            <div className="w-7/12 mx-auto">
-              <h2 className="text-3xl bold ">Why Choose Decert?</h2>
-              <p className="text-base w-9/12 py-6">
+          <div className="w-8/12 mx-auto flex py-16 bg-[#fffff]">
+            <div className="w-11/12">
+              <h2 className={`text-3xl bold ${space_grotesk.className}`}>
+                Why Choose Decert?
+              </h2>
+              <p className={`text-base w-11/12 py-6 ${poppins.className}`}>
                 At Decert, transparency drives trust. With our user-centric
                 approach, certifications are stored securely using IPFS and
                 Filecoin via Lighthouse, ensuring permanent integrity and easy
@@ -109,7 +105,13 @@ const HomePage = () => {
               </p>
               <Button variant="secondary">Get Started</Button>
             </div>
-            {/* <Image/> */}
+            <Image src={"/question.png"} width={400} height={400} alt="logo" />
+          </div>
+        </div>
+
+        <div className="border-t w-full text-center pt-4 border-black s">
+          <div className={`${space_grotesk.className}`}>
+            Built with 🖤 by EtheNinjas
           </div>
         </div>
       </div>
