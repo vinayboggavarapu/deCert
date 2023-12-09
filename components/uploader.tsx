@@ -1,18 +1,38 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import lighthouse from "@lighthouse-web3/sdk";
 import { LogInWithAnonAadhaar, useAnonAadhaar } from "anon-aadhaar-react";
+import { Input } from "./ui/input";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Form, FormControl, FormField, FormItem, FormMessage } from "./ui/form";
+import { Progress } from "./ui/progress";
+import { useContractWrite } from "wagmi";
+import { abi, contractAddress } from "@/lib/contractUtils";
+import { Loader2 } from "lucide-react";
+import { toast } from "./ui/use-toast";
 
+const formSchema = z.object({
+  email: z.string().min(1, { message: "User Email is required" }),
+  uploadedFile: z.string().min(1, { message: "File is required" }),
+});
 function Uploader() {
-  const [anonAadhaar] = useAnonAadhaar();
-  useEffect(() => {
-    console.log("Anon Aadhaar status: ", anonAadhaar.status);
-  }, [anonAadhaar]);
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      email: "",
+      uploadedFile: "",
+    },
+  });
+  const [user, setUser] = useState("");
+  const [progress, setProgress] = useState(0);
+  // const [uploadedFile, setUploadedFile] = useState("");
   const progressCallback = (progressData: number) => {
     let percentageDone: number =
       //@ts-ignore
       100 - (progressData?.total / progressData?.uploaded)?.toFixed(2);
-    console.log(percentageDone);
+    setProgress(percentageDone);
   };
 
   const uploadFile = async (file: any) => {
@@ -45,20 +65,97 @@ function Uploader() {
       console.log(
         "Visit at https://gateway.lighthouse.storage/ipfs/" + output.data.Hash
       );
+
+      form.setValue(
+        "uploadedFile",
+        `https://gateway.lighthouse.storage/ipfs/${output.data.Hash}`
+      );
     }
   };
 
+  const { watch } = form;
+
+  const {
+    data: writeData,
+    isLoading,
+    isSuccess,
+    write,
+  } = useContractWrite({
+    address: contractAddress,
+    abi: abi,
+    functionName: "addUserData",
+    args: [watch("email"), watch("uploadedFile")],
+  });
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast({
+        title: "Success",
+        description: "Certificate uploaded successfully",
+      });
+      form.reset();
+    }
+  }, [isSuccess]);
+
   return (
-    <div className="App">
-      <input
-        onChange={(e) => {
-          if (e.target.files) {
-            uploadFile(e.target.files!);
-          }
-        }}
-        type="file"
-      />
-      <LogInWithAnonAadhaar />
+    <div className="w-full flex flex-col gap-4">
+      <Form {...form}>
+        <form
+          className="flex  flex-1 pt-12 h-full flex-col gap-10"
+          onSubmit={form.handleSubmit((data) => write())}
+        >
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <Input
+                    placeholder="Enter the user email to share him the certificate"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="uploadedFile"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <>
+                    <Input
+                      type="file"
+                      onChange={(e) => {
+                        if (e.target.files) {
+                          uploadFile(e.target.files!);
+                        }
+                      }}
+                    />
+                    {progress > 0 && (
+                      <Progress value={progress} className="h-2" />
+                    )}
+                  </>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <button
+            className="p-1 text-base bg-blue-500 text-white rounded-md"
+            type="submit"
+          >
+            {!isLoading ? (
+              "Submit"
+            ) : (
+              <Loader2 className="animate-spin w-fit mx-auto" />
+            )}
+          </button>
+        </form>
+      </Form>
     </div>
   );
 }
