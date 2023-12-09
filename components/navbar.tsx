@@ -21,23 +21,19 @@ const Navbar = () => {
       <Link href="/">
         <h1 className="text-2xl cursor-pointer">Decert.</h1>
       </Link>
-      <ul className="hidden lg:flex gap-4">
-        {/* <li>Home</li>
+      <ul className="hidden md:flex border-black border gap-10 py-2.5 px-10 rounded-full">
+        <Link href="/">Home</Link>
         <Link href="/user">
           <button>User</button>
-        </Link> */}
-        <ul className="hidden md:flex gap-4 p-2">
-          <li>Home</li>
-          <Link href="/user">
-            <button>User</button>
-          </Link>
-          <Link href="/issuer">
-            <button>Issuer</button>
-          </Link>
-        </ul>
+        </Link>
+        <Link href="/issuer">
+          <button>Issuer</button>
+        </Link>
+      </ul>
+      <>
         {!address ? (
           <button
-            className="text-md py-2 px-6 rounded-full bg-blue-600 text-white"
+            className="text-md py-2.5 px-6 rounded-full bg-black text-[#cccc]"
             onClick={() => {
               open();
             }}
@@ -54,7 +50,7 @@ const Navbar = () => {
             Logout
           </button>
         )}
-      </ul>
+      </>
     </div>
   );
 };
